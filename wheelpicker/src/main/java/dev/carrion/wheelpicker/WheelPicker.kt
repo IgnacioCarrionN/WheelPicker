@@ -92,7 +92,11 @@ class WheelPicker(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
         wheelRv.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 snapToPosition(position)
-                wheelRv.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    wheelRv.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                } else {
+                    wheelRv.viewTreeObserver.removeGlobalOnLayoutListener(this)
+                }
             }
         })
 
