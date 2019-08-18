@@ -67,6 +67,7 @@ class WheelPicker(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
     private fun initRecycler(valuesList: List<String>) {
         wheelRv.layoutManager = layoutManager
         snapHelper.attachToRecyclerView(wheelRv)
+        wheelRv.onFlingListener = LoopFlingListener()
         itemList = valuesList
 
         val midPosition = valuesList.size * (wheelRv.adapter as BaseWheelAdapter).listMultiplier / 2
@@ -132,6 +133,19 @@ class WheelPicker(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
         (wheelRv.findViewHolderForAdapterPosition(newSnap) as? BaseWheelViewHolder)?.updateView(isSelected = true)
     }
 
+    private fun updateVisibleItems() {
+        val firstPosition = layoutManager.findFirstVisibleItemPosition()
+        val lastPosition = layoutManager.findLastVisibleItemPosition()
+        val middle = firstPosition + ((lastPosition - firstPosition) / 2)
+
+        val rotationStep = 75f / (middle - firstPosition)
+
+        for(i in firstPosition..lastPosition) {
+            val currentRot = rotationStep * -(i - middle)
+            (wheelRv.findViewHolderForAdapterPosition(i) as? BaseWheelViewHolder)?.rotateView(currentRot)
+        }
+    }
+
 
     inner class LoopScrollListener : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -153,7 +167,14 @@ class WheelPicker(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
                     updateStateSnapView(snapedItem, currentSnap)
                     snapedItem = currentSnap
                 }
+                updateVisibleItems()
             }
+        }
+    }
+
+    inner class LoopFlingListener : RecyclerView.OnFlingListener() {
+        override fun onFling(velocityX: Int, velocityY: Int): Boolean {
+            return true
         }
     }
 }
