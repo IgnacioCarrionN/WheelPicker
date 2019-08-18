@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:text="1"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" android:id="@+id/default_item__label__value" android:gravity="center"
-          android:background="@color/grey" android:textColor="@color/white"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/default_item__container_value"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/light_grey">
+    <TextView
+            tools:text="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/default_item__label__value" android:gravity="center"
+            android:textColor="@color/white" android:textSize="18sp"
+            android:paddingTop="8dp" android:paddingBottom="8dp"
+            app:fontFamily="@font/roboto_bold"/>
+    
+</LinearLayout>
