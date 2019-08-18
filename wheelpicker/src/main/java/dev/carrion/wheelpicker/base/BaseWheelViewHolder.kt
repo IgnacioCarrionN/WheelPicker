@@ -9,6 +9,8 @@ abstract class BaseWheelViewHolder(view: View, callback: (Int) -> Unit) : Recycl
 
     abstract fun updateView(isSelected: Boolean)
 
+    abstract fun rotateView(rotation: Float)
+
     init {
         view.setOnClickListener {
             callback(adapterPosition)
