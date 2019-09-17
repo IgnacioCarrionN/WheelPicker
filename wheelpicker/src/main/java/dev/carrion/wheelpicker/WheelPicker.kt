@@ -174,7 +174,7 @@ class WheelPicker(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
 
     inner class LoopFlingListener : RecyclerView.OnFlingListener() {
         override fun onFling(velocityX: Int, velocityY: Int): Boolean {
-            return true
+            return false
         }
     }
 }
