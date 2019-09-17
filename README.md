@@ -22,7 +22,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-  implementation 'com.github.IgnacioCarrionN:WheelPicker:0.0.1-Alpha03'
+  implementation 'com.github.IgnacioCarrionN:WheelPicker:0.0.1-Alpha04'
 }
 ```
 
